@@ -46,6 +46,30 @@ public class AddressBook {
         contacts.setAddress(address);
 
         contactsArrayList.add(contacts);
+    }
+    public void editContact() {
+        System.out.println("Edit contact of First Name:");
+        String firstName = scanner.next();
+
+        boolean isContactThere = false;
+
+        for(Contacts contact:contactsArrayList){
+
+            if(firstName.equals(contact.getFirstName())){
+
+                isContactThere =true;
+                System.out.println("Contact Found! Edit contact details now :");
+                contact.editContact();
+                System.out.println("Contact edited successfully!");
+                break;
+
+            }
+
+        }
+
+        if(!isContactThere){
+            System.out.println("No record of contact with First Name "+firstName+" in the address book.");
+        }
 
     }
 }
