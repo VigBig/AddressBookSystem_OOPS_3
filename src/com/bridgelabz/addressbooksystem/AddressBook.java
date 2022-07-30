@@ -72,4 +72,28 @@ public class AddressBook {
         }
 
     }
+
+    public void deleteContact() {
+        System.out.println("Delete contact of First Name:");
+        String firstName = scanner.next();
+
+        boolean isContactThere = false;
+
+        for(Contacts contact:contactsArrayList){
+            if(firstName.equals(contact.getFirstName())){
+
+                isContactThere =true;
+                contactsArrayList.remove(contact);
+                System.out.println("Contact deleted successfully!");
+
+                break;
+            }
+
+        }
+
+        if(!isContactThere){
+            System.out.println("No record of contact with First Name "+firstName+" in the address book.");
+        }
+
+    }
 }
