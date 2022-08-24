@@ -20,7 +20,10 @@ public class AddressBookMain {
             AddressBook addressBook = new AddressBook();
             System.out.println("Enter Address Book Name:");
             String addressBookName = sc.next();
-//            addressBook.setAddressBookName(addressBookName);
+            if(addressBook.addAddressBook(map,addressBookName))
+                menuAgain = false;
+            else
+                menuAgain = true;
 
             start:
             while(menuAgain){
@@ -112,6 +115,7 @@ public class AddressBookMain {
                         continue start;
                 }
 
+                map.put(addressBookName,addressBook);
                 if(choice ==5) {
                     break;
                 }else{
@@ -130,7 +134,7 @@ public class AddressBookMain {
 
             }
 
-            map.put(addressBookName,addressBook);
+
             System.out.println("Do you wish to add another Address Book? (Enter Y as Yes or any key as No)");
             char c = sc.next().charAt(0);
 

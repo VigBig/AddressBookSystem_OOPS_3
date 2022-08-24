@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbooksystem;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Contacts {
@@ -78,38 +79,63 @@ public class Contacts {
         this.address = address;
     }
 
-    public void editContact(){
+    public boolean editContact(List<Contacts> contactsArrayList){
         System.out.println("Enter First Name:");
         String firstName = scanner.next();
-        setFirstName(firstName);
 
         System.out.println("Enter Last Name:");
         String lastName = scanner.next();
-        setLastName(lastName);
 
-        System.out.println("Enter Email:");
-        String email = scanner.next();
-        setEmail(email);
+        boolean isContactThere = false;
 
-        System.out.println("Enter Phone Number:");
-        String phoneNumber = scanner.next();
-        setPhoneNumber(phoneNumber);
+        for(Contacts contact:contactsArrayList) {
 
-        System.out.println("Enter Zip Code:");
-        String zip = scanner.next();
-        setZip(zip);
+            if (firstName.equals(contact.getFirstName()) && lastName.equals(contact.getLastName())) {
 
-        System.out.println("Enter City:");
-        String city = scanner.next();
-        setCity(city);
+                isContactThere = true;
+                break;
 
-        System.out.println("Enter State:");
-        String state = scanner.next();
-        setState(state);
+            }
+        }
+        if(isContactThere){
+            System.out.println("Contact with First Name :"+firstName+" and Last Name :"+lastName+" already exists in the address book.");
+            return true;
+        } else {
 
-        System.out.println("Enter Address:");
-        String address = scanner.next();
-        setAddress(address);
+//                System.out.println("Enter First Name:");
+//                String firstName = scanner.next();
+            setFirstName(firstName);
+
+//                System.out.println("Enter Last Name:");
+//                String lastName = scanner.next();
+            setLastName(lastName);
+
+            System.out.println("Enter Email:");
+            String email = scanner.next();
+            setEmail(email);
+
+            System.out.println("Enter Phone Number:");
+            String phoneNumber = scanner.next();
+            setPhoneNumber(phoneNumber);
+
+            System.out.println("Enter Zip Code:");
+            String zip = scanner.next();
+            setZip(zip);
+
+            System.out.println("Enter City:");
+            String city = scanner.next();
+            setCity(city);
+
+            System.out.println("Enter State:");
+            String state = scanner.next();
+            setState(state);
+
+            System.out.println("Enter Address:");
+            String address = scanner.next();
+            setAddress(address);
+
+            return false;
+        }
 
     }
 
