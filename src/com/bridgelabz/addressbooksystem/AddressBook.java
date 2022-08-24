@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class AddressBook {
 
@@ -133,4 +134,52 @@ public class AddressBook {
 
     }
 
+
+    public void SearchPersonByCityOrState(Map<String, AddressBook> map) {
+
+        System.out.print(" Enter to view by city or state: ");
+        String searchChoice = scanner.next();
+
+        if(searchChoice.equalsIgnoreCase("City")){
+
+            System.out.print(" Enter city : ");
+            String city = scanner.next();
+
+            map.values().stream().forEach( (addressBook) -> {
+
+                addressBook.contactsArrayList.stream().filter( contacts ->
+
+                        contacts.getCity().equalsIgnoreCase(city)
+
+                ).forEach(contacts ->
+
+                        System.out.println(contacts));
+
+                }
+
+            );
+
+        } else if (searchChoice.equalsIgnoreCase("State")) {
+
+            System.out.print(" Enter state : ");
+            String state = scanner.next();
+
+            map.values().stream().forEach( (addressBook) -> {
+
+                        addressBook.contactsArrayList.stream().filter( contacts ->
+
+                                contacts.getState().equalsIgnoreCase(state)
+
+                        ).forEach(contacts ->
+
+                                System.out.println(contacts));
+
+                    }
+
+            );
+
+        }else
+            System.out.println("Incorrect selection. Please select City or State");
+
+    }
 }
