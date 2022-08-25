@@ -173,7 +173,7 @@ public class AddressBook {
 
     public void SearchPersonByCityOrState(Map<String, AddressBook> map) {
 
-        System.out.print(" Enter to view by city or state: ");
+        System.out.print(" Enter option to search by city or state: ");
         String searchChoice = scanner.next();
 
         if(searchChoice.equalsIgnoreCase("City")){
@@ -221,7 +221,7 @@ public class AddressBook {
 
     public void ViewPersonByCityOrState(Map<String, AddressBook> map) {
 
-        System.out.print(" Enter to view by city or state: ");
+        System.out.print(" Enter option to view by city or state: ");
         String searchChoice = scanner.next();
 
         if(searchChoice.equalsIgnoreCase("City")){
@@ -269,7 +269,7 @@ public class AddressBook {
 
     public void CountPersonByCityOrState(Map<String, AddressBook> map) {
 
-        System.out.print(" Enter to view by city or state: ");
+        System.out.print(" Enter option to count by city or state: ");
         String searchChoice = scanner.next();
 
         if(searchChoice.equalsIgnoreCase("City")){
@@ -319,4 +319,63 @@ public class AddressBook {
 
 
     }
+
+    public void SortPersonByNameOrCityOrStateOrZip(Map<String, AddressBook> map) {
+        System.out.print(" Enter option to sort by name,city, state or zip: ");
+        String searchChoice = scanner.next();
+
+        if (searchChoice.equalsIgnoreCase("Name")) {
+
+            for (AddressBook addBook : map.values()) {
+
+                 addBook.contactsArrayList.stream().sorted((contact1, contact2) ->
+
+                         contact1.getFirstName().compareToIgnoreCase(contact2.getFirstName())
+
+                ).forEach(contact -> System.out.println(contact));
+
+            }
+
+
+        }else if (searchChoice.equalsIgnoreCase("City")) {
+
+            for (AddressBook addBook : map.values()) {
+
+                addBook.contactsArrayList.stream().sorted((contact1, contact2) ->
+
+                        contact1.getCity().compareToIgnoreCase(contact2.getCity())
+
+                ).forEach(contact -> System.out.println(contact));
+
+            }
+
+
+        } else if (searchChoice.equalsIgnoreCase("State")) {
+
+            for (AddressBook addBook : map.values()) {
+
+                addBook.contactsArrayList.stream().sorted((contact1, contact2) ->
+
+                        contact1.getState().compareToIgnoreCase(contact2.getState())
+
+                ).forEach(contact -> System.out.println(contact));
+
+            }
+
+
+        } else if (searchChoice.equalsIgnoreCase("Zip")) {
+
+            for (AddressBook addBook : map.values()) {
+
+                addBook.contactsArrayList.stream().sorted((contact1, contact2) ->
+
+                        contact1.getZip().compareToIgnoreCase(contact2.getZip())
+
+                ).forEach(contact -> System.out.println(contact));
+
+            }
+        } else
+            System.out.println("Incorrect selection. Please select Name,City,State or Zip");
+    }
+
 }

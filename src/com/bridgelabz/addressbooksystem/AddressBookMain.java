@@ -24,8 +24,9 @@ public class AddressBookMain {
             System.out.println("2. Search Contacts by City or State");
             System.out.println("3. View Contacts by City or State");
             System.out.println("4. Count Contacts by City or State");
-            System.out.println("5. View Address Book and Contacts");
-            System.out.println("6. Exit Contacts Menu");
+            System.out.println("5. Sort Contacts by Name,City, State or Zip");
+            System.out.println("6. View Address Book and Contacts");
+            System.out.println("7. Exit Contacts Menu");
             int addressBookMenuChoice = sc.nextInt();
 
             switch (addressBookMenuChoice) {
@@ -186,7 +187,7 @@ public class AddressBookMain {
                     while (true) {
                         addressBook.CountPersonByCityOrState(map);
 
-                        System.out.println("Do you wish to View Contact by City Or State Again? (Enter Y to search or any key as No)");
+                        System.out.println("Do you wish to Count Contact by City Or State Again? (Enter Y to search or any key as No)");
                         char c2 = sc.next().charAt(0);
 
                         if (c2 == 'y' || c2 == 'Y') {
@@ -197,6 +198,20 @@ public class AddressBookMain {
                     }
 
                 case 5:
+                    while (true) {
+                        addressBook.SortPersonByNameOrCityOrStateOrZip(map);
+
+                        System.out.println("Do you wish to Sort Contact by Name,City,State or Zip Again? (Enter Y to search or any key as No)");
+                        char c2 = sc.next().charAt(0);
+
+                        if (c2 == 'y' || c2 == 'Y') {
+                            continue;
+                        } else {
+                            break;
+                        }
+                    }
+
+                case 6:
 
                     System.out.println("Displaying All Address books with its contacts:");
                     for (Map.Entry<String, AddressBook> pair : map.entrySet()) {
@@ -205,7 +220,7 @@ public class AddressBookMain {
 
                     break;
 
-                case 6:
+                case 7:
                     System.out.println("Exiting Address Book menu");
                     break;
                 default:
@@ -213,7 +228,7 @@ public class AddressBookMain {
                     continue startAddressBookMenu;
             }
 
-                    if(addressBookMenuChoice ==6) {
+                    if(addressBookMenuChoice ==7) {
                         break;
                     }else{
                         System.out.println("Do you wish to return to Address Book menu? (Enter Y as Yes or any key as No)");
