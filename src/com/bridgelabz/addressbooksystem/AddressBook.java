@@ -1,9 +1,6 @@
 package com.bridgelabz.addressbooksystem;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class AddressBook {
@@ -11,6 +8,11 @@ public class AddressBook {
     static Scanner scanner = new Scanner(System.in);
 
     List<Contacts> contactsArrayList = new ArrayList<>();
+
+    List<Contacts> contactsCityList = new ArrayList<>();
+    List<Contacts> contactsStateList = new ArrayList<>();
+    Map<String, List> cityPersonMap = new HashMap<>();
+    Map<String, List> statePersonMap = new HashMap<>();
 
     public boolean addAddressBook(Map<String, AddressBook> map, String addressBookName) {
 
@@ -81,9 +83,44 @@ public class AddressBook {
                 contacts.setAddress(address);
 
                 contactsArrayList.add(contacts);
-            }
+//                contactsCityList.add(contacts);
+//                contactsStateList.add(contacts);
+
+                mapCityAndStateToContactsList(cityPersonMap,city,statePersonMap,state,contacts);
+
+
+                }
 
     }
+
+
+    public void mapCityAndStateToContactsList(Map<String, List> cityPersonMap, String city, Map<String, List> statePersonMap, String state, Contacts contacts) {
+        if(cityPersonMap.containsKey(city)){
+            contactsCityList = cityPersonMap.get(city);
+            contactsCityList.add(contacts);
+        } else {
+            List<Contacts> contactsCityList = new ArrayList<>();
+            contactsCityList.add(contacts);
+            cityPersonMap.put(city, contactsCityList);
+        }
+
+        if(statePersonMap.containsKey(state)){
+            contactsStateList = statePersonMap.get(state);
+            contactsStateList.add(contacts);
+        } else {
+            List<Contacts> contactsStateList = new ArrayList<>();
+            contactsStateList.add(contacts);
+            statePersonMap.put(state, contactsStateList);
+        }
+
+        System.out.println("Printing cityPersonMap :");
+        System.out.println(cityPersonMap);
+
+        System.out.println("Printing statePersonMap :");
+        System.out.println(statePersonMap);
+    }
+
+
     public void editContact() {
         System.out.println("Enter to search contact of First Name:");
         String firstName = scanner.next();
@@ -177,6 +214,61 @@ public class AddressBook {
                     }
 
             );
+
+        }else
+            System.out.println("Incorrect selection. Please select City or State");
+
+    }
+
+    public void ViewPersonByCityOrState(Map<String, AddressBook> map) {
+
+        System.out.print(" Enter to view by city or state: ");
+        String searchChoice = scanner.next();
+
+        if(searchChoice.equalsIgnoreCase("City")){
+
+            System.out.print(" Enter city : ");
+            String city = scanner.next();
+
+            map.values().stream().forEach( (addressBook) -> {
+
+                    addressBook.cityPersonMap.entrySet().stream().filter((searchCity) ->
+
+                            searchCity.getKey().equalsIgnoreCase(city)
+
+                            ).forEach( (filteredCity) ->
+                            System.out.println(filteredCity));
+
+                    }
+
+            );
+
+
+//            map.values().stream().forEach( (addressBook) ->
+//                    System.out.println(addressBook.cityPersonMap.get(city))
+//            );
+
+        } else if (searchChoice.equalsIgnoreCase("State")) {
+
+            System.out.print(" Enter state : ");
+            String state = scanner.next();
+
+            map.values().stream().forEach( (addressBook) -> {
+
+                        addressBook.statePersonMap.entrySet().stream().filter((searchState) ->
+
+                                searchState.getKey().equalsIgnoreCase(state)
+
+                        ).forEach( (filteredState) ->
+                                System.out.println(filteredState));
+
+                    }
+
+            );
+
+//            map.values().stream().forEach( (addressBook) ->
+//                    System.out.println(addressBook.statePersonMap.get(state))
+//            );
 
         }else
             System.out.println("Incorrect selection. Please select City or State");
