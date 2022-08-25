@@ -1,7 +1,6 @@
 package com.bridgelabz.addressbooksystem;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class AddressBook {
 
@@ -113,11 +112,11 @@ public class AddressBook {
             statePersonMap.put(state, contactsStateList);
         }
 
-        System.out.println("Printing cityPersonMap :");
-        System.out.println(cityPersonMap);
-
-        System.out.println("Printing statePersonMap :");
-        System.out.println(statePersonMap);
+//        System.out.println("Printing cityPersonMap :");
+//        System.out.println(cityPersonMap);
+//
+//        System.out.println("Printing statePersonMap :");
+//        System.out.println(statePersonMap);
     }
 
 
@@ -133,8 +132,8 @@ public class AddressBook {
 
                 isContactThere =true;
                 System.out.println("Contact Found! Edit contact details now :");
-                if(contact.editContact(contactsArrayList)==false)
-                    System.out.println("Contact edited successfully!");
+                contact.editContact();
+                System.out.println("Contact edited successfully!");
                 break;
 
             }
@@ -244,10 +243,6 @@ public class AddressBook {
             );
 
 
-//            map.values().stream().forEach( (addressBook) ->
-//                    System.out.println(addressBook.cityPersonMap.get(city))
-//            );
-
         } else if (searchChoice.equalsIgnoreCase("State")) {
 
             System.out.print(" Enter state : ");
@@ -266,12 +261,62 @@ public class AddressBook {
 
             );
 
-//            map.values().stream().forEach( (addressBook) ->
-//                    System.out.println(addressBook.statePersonMap.get(state))
-//            );
 
         }else
             System.out.println("Incorrect selection. Please select City or State");
+
+    }
+
+    public void CountPersonByCityOrState(Map<String, AddressBook> map) {
+
+        System.out.print(" Enter to view by city or state: ");
+        String searchChoice = scanner.next();
+
+        if(searchChoice.equalsIgnoreCase("City")){
+
+            System.out.print(" Enter city : ");
+            String city = scanner.next();
+
+            int cityCount = 0;
+
+            for (AddressBook addBook : map.values()) {
+
+                cityCount += addBook.contactsArrayList.stream().filter((contact) ->
+
+                        contact.getCity().equalsIgnoreCase(city)
+
+                ).count();
+
+            }
+
+            System.out.println(" Total count: " + cityCount);
+
+
+
+
+
+        } else if (searchChoice.equalsIgnoreCase("State")) {
+
+            System.out.print(" Enter state : ");
+            String state = scanner.next();
+
+                int stateCount = 0;
+
+                for (AddressBook addBook : map.values()) {
+
+                    stateCount += addBook.contactsArrayList.stream().filter((contact) ->
+
+                            contact.getState().equalsIgnoreCase(state)
+
+                    ).count();
+
+                }
+
+                    System.out.println(" Total count: " + stateCount);
+
+        }else
+            System.out.println("Incorrect selection. Please select City or State");
+
 
     }
 }

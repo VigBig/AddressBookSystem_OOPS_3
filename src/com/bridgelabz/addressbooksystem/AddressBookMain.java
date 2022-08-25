@@ -19,12 +19,13 @@ public class AddressBookMain {
         startAddressBookMenu :
         while(bookAgain){
             AddressBook addressBook = new AddressBook();
-            System.out.println("Select Address Book menu options(1 to 5) below:");
+            System.out.println("Select Address Book menu options(1 to 6) below:");
             System.out.println("1. Add Address Book");
             System.out.println("2. Search Contacts by City or State");
             System.out.println("3. View Contacts by City or State");
-            System.out.println("4. View Address Book and Contacts");
-            System.out.println("5. Exit Contacts Menu");
+            System.out.println("4. Count Contacts by City or State");
+            System.out.println("5. View Address Book and Contacts");
+            System.out.println("6. Exit Contacts Menu");
             int addressBookMenuChoice = sc.nextInt();
 
             switch (addressBookMenuChoice) {
@@ -182,6 +183,20 @@ public class AddressBookMain {
                     }
 
                 case 4:
+                    while (true) {
+                        addressBook.CountPersonByCityOrState(map);
+
+                        System.out.println("Do you wish to View Contact by City Or State Again? (Enter Y to search or any key as No)");
+                        char c2 = sc.next().charAt(0);
+
+                        if (c2 == 'y' || c2 == 'Y') {
+                            continue;
+                        } else {
+                            break;
+                        }
+                    }
+
+                case 5:
 
                     System.out.println("Displaying All Address books with its contacts:");
                     for (Map.Entry<String, AddressBook> pair : map.entrySet()) {
@@ -190,7 +205,7 @@ public class AddressBookMain {
 
                     break;
 
-                case 5:
+                case 6:
                     System.out.println("Exiting Address Book menu");
                     break;
                 default:
@@ -198,7 +213,7 @@ public class AddressBookMain {
                     continue startAddressBookMenu;
             }
 
-                    if(addressBookMenuChoice ==5) {
+                    if(addressBookMenuChoice ==6) {
                         break;
                     }else{
                         System.out.println("Do you wish to return to Address Book menu? (Enter Y as Yes or any key as No)");
