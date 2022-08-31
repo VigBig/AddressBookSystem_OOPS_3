@@ -3,6 +3,7 @@ package com.bridgelabz.addressbooksystem;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class AddressBookMain {
     public static void main(String[] args) {
@@ -15,11 +16,12 @@ public class AddressBookMain {
 
         while(bookAgain){
 
-            if(addressBookMenu.addressBookMenuOptions() <1 || addressBookMenu.addressBookMenuOptions() >7){
+            if(addressBookMenu.addressBookMenuOptions() <1 || addressBookMenu.addressBookMenuOptions() >8){
                 break;
             }
 
         }
+
 
     }
 }

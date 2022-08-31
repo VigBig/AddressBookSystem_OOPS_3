@@ -7,10 +7,11 @@ import java.util.Scanner;
 public class AddressBookMenu {
     static Scanner sc = new Scanner(System.in);
     Map<String, AddressBook> map = new HashMap<>();
-
+    AddressBookIOService addressBookIOService = new AddressBookIOService();
     public int addressBookMenuOptions() {
 
         AddressBook addressBook = new AddressBook();
+
         System.out.println("Select Address Book menu options(1 to 6) below. Entering anything else option will exit the menu:");
         System.out.println("1. Add Address Book");
         System.out.println("2. Search Contacts by City or State");
@@ -18,6 +19,7 @@ public class AddressBookMenu {
         System.out.println("4. Count Contacts by City or State");
         System.out.println("5. Sort Contacts by Name,City, State or Zip");
         System.out.println("6. View Address Book and Contacts");
+        System.out.println("7. View Address Book and Contacts from File");
         int addressBookMenuChoice = sc.nextInt();
 
         switch (addressBookMenuChoice) {
@@ -60,7 +62,8 @@ public class AddressBookMenu {
                 break;
 
             case 7:
-                System.out.println("Exiting Address Book menu");
+                addressBookIOService.writeAddressBookData(map);
+                addressBookIOService.readAddressBookData(map);
                 break;
             default:
 
@@ -122,6 +125,7 @@ public class AddressBookMenu {
         }
 
         map.put(addressBookName, addressBook);
+//        addressBookIOService.writeAddressBookData(map);
         if(choice <1 || choice >4){
             return false;
         }else{

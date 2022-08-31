@@ -50,7 +50,6 @@ public class AddressBook {
 
                 contacts.setFirstName(firstName);
 
-
                 contacts.setLastName(lastName);
 
                 System.out.println("Enter Email:");
@@ -80,6 +79,7 @@ public class AddressBook {
                 contactsArrayList.add(contacts);
 
                 mapCityAndStateToContactsList(cityPersonMap,city,statePersonMap,state,contacts);
+
 
 
                 }
